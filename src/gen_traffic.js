@@ -3,8 +3,8 @@ const csv = require('csv-parser');
 const fs = require('fs');
 
 /* The length of the experiment in ms (60 seconds * 10 minutes * 1000 ms) */
-// const TOTAL_TIME = 60 * 10 * 1000;
-const TOTAL_TIME = 10 * 1000;
+const TOTAL_TIME = 60 * 10 * 1000;
+//const TOTAL_TIME = 10 * 1000;
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -13,7 +13,7 @@ function sleep(ms) {
 function get_urllist() {
     return new Promise(resolve => {
         const results = [];
-        fs.createReadStream('urllist.csv')
+        fs.createReadStream('/home/stariq/testbed/cctracing/src/urllist.csv')
         .pipe(csv())
         .on('data', (row) => {
         results.push(row);
@@ -62,7 +62,7 @@ async function runExp() {
 
     start_time = Date.now();
     
-    while (Date.now() - start_time < TOTAL_TIME)
+    while (Date.now() - start_time < exp_length)
     {
         wait = parseInt(urllist[i]['wait']) * 1000;
         url = urllist[i]['url'];

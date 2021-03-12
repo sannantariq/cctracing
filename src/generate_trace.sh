@@ -14,8 +14,8 @@ start=$(date +"%Y%m%d%H%M%S")
 outpcap="$trace_dir_path/$start.pcap"
 echo "Starting trace of interface : ${interface} for ${trace_length} second(s) at ${start} and saving to directory: '${outpcap}'"
 
-timeout $((trace_length + 5)) tcpdump -i $interface -s 94 -w $outpcap 'ip and tcp' &
-node gen_traffic.js $trace_length
+timeout $((trace_length + 5)) /usr/sbin/tcpdump -i $interface -s 94 -w $outpcap 'ip and tcp' &
+/usr/local/bin/node /home/stariq/testbed/cctracing/src/gen_traffic.js $trace_length
 
 end=$(date +"%Y%m%d%H%M%S")
 
